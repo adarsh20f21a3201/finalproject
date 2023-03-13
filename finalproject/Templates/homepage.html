@@ -1,0 +1,108 @@
+
+{% load static %}
+
+<html>
+    <head>
+        <title> my page </title>   
+    </head>
+    <style>
+        *{
+            margin:0%;
+            padding:0%;
+            box-shadow: 0%;
+        }
+        button{border:transparent;}
+        button:focus{outline:white;}
+        input{margin-top:0px;width:250px;border:3px solid #fa4299;border-top:transparent;border-left:transparent;border-right:transparent;background:transparent;height:30px;font-size:15px;}
+        input:focus{outline:white;}
+        #mb{margin-top:-900px;background: rgb(2, 20, 82);position:relative;width:1000px;height:30px; margin-left:220px;padding-bottom: 15px;padding-top: 0px;}
+        li{display:inline;margin-left:70px; color:rgb(171, 225, 225);font-size:15px;color:white;}
+        #contacts{
+            display:none;
+            width:300px;
+            background: rgb(2, 20, 82);;
+            opacity:0.8;
+            padding-top:10px;
+            
+        }
+        #contacts li{
+            font-size:20px;
+            margin-top:15px;
+            margin-left:0px;
+            
+        }
+        #contact:hover #contacts{
+            display:block;
+            margin-top:10px;
+            margin-left:600px;
+        }
+a{text-decoration: none;color:white;}
+    </style>
+    <body>
+        
+
+        <div style="background:rgb(243, 238, 238);height:60px;width:1000px;opacity:0.6;margin-top:30px;margin-left:220px;position:relative;padding-top:10px;"></div>
+        <img src="{% static 'venu1.jpg' %}" style="margin-left:0px;width:1530px;height:1000px;margin-top:-120px;opacity:1;"></img>
+            <img src="{% static 'Gates.png' %}" style="position:relative;margin-top:-960px;margin-left:220px;height:100px;width:1000px;">
+            
+<div id="mb" style="opacity:0.8;">
+    <div id="oneone">
+    <div id="one" style="margin-top:-30px;margin-left:800px;"><a href="/{{Done.2}}" ><input type="button" value="{{Done.2}}" style="position:relative;margin-top:30px;height:35px;width:70px;border-radius:50px;border:transparent;background: rgb(175, 117, 8);"></a></div>
+        <div id="two" style="margin-top:-35px;margin-left:880px;"><a href="/login" ><input type="button" value="sign in" style="position:relative;margin-top:0px;height:35px;width:70px;border-radius:50px;border:transparent;background: rgb(175, 117, 8);"></a></div>
+    </div>
+        <div id="li">
+    <ul id="mb1" style="margin-top:-20px;" >
+        <li><a href="/{{para}}">HOME</a></li>
+        <li><a href="/about{{para}}">ABOUT</a></li>
+        <li><a href="/departments{{para}}">DEPARTMENT</a></li>       
+        <li><a href="/{{Done.1}}{{para}}">CLUBS</a></li>       
+        <li id="contact"><a href="#">CONTACT</a>
+            <ul id="contacts">
+                <li>Contact:8328267589</li>
+                <li>Email:vaddeadarsh150@gmail.com</li>
+            </ul>
+        </li>      
+        
+    </ul></div>
+</div>
+<a href="/{{para1}}"><div style="height:80px;width:80px;border-radius:100px;border:2px solid black;position: relative;margin-left:1255px;margin-top:-120px;">
+    <div id="pic" style="background:white;height:80px;width:80px;border-radius:100px;">
+        <img src="/media/{{image}}" style="height:80px;width:80px;border-radius:100px;">
+        </div>
+    </div></a>
+    
+    
+
+
+{% if data.roll_no != none %}
+{% if data.department != none %}
+
+<span id="picpppp">{% include Done.0 %}</span>
+{% endif %}
+
+{% endif %}
+{% if data != none %}
+{% if data.roll_no == '' %}
+{% if data.department == '' %}
+
+
+<script>
+    document.getElementById('departandroll').style="display:block;";
+</script>
+<div id="glass" style="width:1520px;height:1100px;border-radius:20px;background:white;margin-top:-250px;position:relative;opacity: 0.5;"></div>
+<div id="departandroll" style="height:300px;width:300px;background:-webkit-linear-gradient(200deg,#FED8F7,#C4DDFE);position:absolute;margin-left:600px;margin-top:-700px;border-radius:10px;">
+    <div id="allin" style="margin-top:70px;margin-left:20px;">
+        <form method="post" action="/departandroll{{para}}">{% csrf_token %}
+        <div style="margin-top:10px;margin-bottom:10px;">Roll Number</div>
+        <input type="text" name="roll_no" placeholder="Roll Number">
+        <div style="margin-top:10px;margin-bottom:10px;">Department</div>
+        <input type="text" name="department" placeholder="Department" style="width:250px;background: transparent;">
+        <button style="background: -webkit-linear-gradient(left,#a445b2,#fa4299);height:30px;width:80px;border-radius:5px;margin-top:30px;margin-left:70px;">Submit</button>
+        </form>
+    </div>
+</div>
+{% endif %}
+
+{% endif %}
+{% endif %}    </body>
+</html>

@@ -1,0 +1,41 @@
+{% load static %}
+
+<style>
+    #pics{margin-left:500px;background:-webkit-linear-gradient(200deg,#FED8F7,#C4DDFE);height:450px;width:500px;border-radius:10px;margin-top:100px;position:absolute;}
+    label[for="id_title"]{display: none;}
+    label[for="id_image"]{color:transparent;}
+    * {
+box-sizing: border-box ;
+padding: 0 ;
+margin: 0 ;
+}
+button{border:transparent;}
+button:focus{outline:white;}
+#mb{margin-top:-850;background: rgb(2, 20, 82);position:relative;width:1000px;height:50px; margin-left:220px;padding-bottom: 15px;padding-top: 5px;}
+
+</style>
+<div id="pics">
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+     {{ form.as_p }}
+     <div style="height:200px;width:490px;margin-top:-10px;border-radius:10px;background:-webkit-linear-gradient(left,#a445b2,#fa4299);margin-left:5px;padding-top:100px;">
+     <label for="id_image">
+      <div style="height:200px;width:200px;background:white;border-radius:100px;margin-left:150px;">
+        <img id="propic"  src="/media/{{image}}" style="height:200px;width:200px;border-radius:100px;border:3px solid #fa4299;">
+      </div>
+     </label></div>
+     <div id="names"  style="margin-top:130px;margin-left:220px;">{{data.name}}</div>
+    <button type="submit" style="margin-top:20px;margin-left:210px;border-radius:10px;background:-webkit-linear-gradient(left,#a445b2,#fa4299);height:30px;width:80px;">Upload</button>
+  </form>
+</div>
+<script>
+  document.getElementById('id_title').value='{{id}}';
+  document.getElementById('id_title').style='display:none';
+  document.getElementById('id_image').style='display:none;';
+  document.getElementById('id_image').setAttribute('onchange','upload(event)');
+
+  var upload=function(event){
+  var image = document.getElementById('propic');
+  image.src= URL.createObjectURL(event.target.files[0])};
+</script>
+  

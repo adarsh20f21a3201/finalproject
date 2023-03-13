@@ -1,0 +1,290 @@
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+
+          integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+
+            crossorigin="anonymous">
+</script>
+
+<body>
+    <form method="post" id="allload" >{% csrf_token %}<input type="text" name="deviceid" id="deviceid" style="display:none" ></form>
+    
+<style>
+* {
+box-sizing: border-box ;
+padding: 0 ;
+margin: 0 ;
+}
+input{margin-top:0px;width:310px;border:3px solid #fa4299;border-top:transparent;border-left:transparent;border-right:transparent;background:transparent;height:30px;font-size:15px;}
+input:focus{outline:white;}
+button{border:transparent;}
+button:focus{outline:white;}
+body{background: transparent;}
+    #maindivbuttons{height:50px;width:325px;background:-webkit-linear-gradient(left,#a445b2,#fa4299);margin-left:12px;border-radius:5px;position:absolute;}
+    #maindiv{height:400px;width:350px;background:-webkit-linear-gradient(200deg,#FED8F7,#C4DDFE);margin-left:575px;border-radius:10px;margin-top:100px;padding-top:10px;position:absolute;}
+    #maindivloginbutton{font-size:20px;height:50px;width:130px;margin-left:12px;border:transparent;background:transparent;}
+    #maindivsignupbutton{font-size:20px;height:50px;width:130px;margin-left:12px;border:transparent;background:transparent;}
+    #maindivloginname{font-size:16px;margin-top:70px;padding-top:20px;height:60px;width:310px;margin-left:5px; }
+    #maindivloinpassword{font-size:16px;padding-top:10px;margin-top:30px;height:60px;width:310px;margin-left:5px;}
+    #maindivsignname{font-size:16px;padding-top:10px;height:60px;width:310px; margin-top:50px;}
+    #maindivsignpassword{font-size:16px;padding-top:10px;height:60px;width:310px; }
+    #maindivsignotp{font-size:16px;padding-top:10px;height:60px;width:310px;margin-top:-38px; }
+    #sendbutton{border-radius: 10px; width: 50px; height: 30px; background: -webkit-linear-gradient(left, rgb(164, 69, 178), rgb(250, 66, 153));}
+    #sendbuttonf{border-radius: 10px; width: 50px; height: 30px; background: -webkit-linear-gradient(left, rgb(164, 69, 178), rgb(250, 66, 153));}
+    #maindivforgetemail{font-size:16px;padding-top:10px;height:60px;width:310px; margin-top:50px;}
+    #maindivforgetotp{font-size:16px;padding-top:10px;height:60px;width:310px;margin-top:-10px;}
+    #maindivforgetpasswordn{font-size:16px;padding-top:10px;height:60px;width:310px; }
+    #maindivforgetpasswordcon{font-size:16px;padding-top:10px;height:60px;width:310px; }
+    #maindivloginsubmit{font-size:16px;height:50px;width:150px;background:-webkit-linear-gradient(left,#a445b2,#fa4299);margin-left:10px;border:transparent;margin-top:70px;border-radius:5px;}
+    #maindivforgetbutton{height:50px;width:150px;background:transparent;color:#fa4299;border:transparent;margin-top:-10px;border-radius:5px;}
+    #maindivsigninbutton{height:50px;width:150px;background:transparent;color:#fa4299;border:transparent;margin-top:20px;border-radius:5px;}
+    #maindivhavebutton{height:50px;width:150px;background:transparent;color:#fa4299;border:transparent;margin-top:20px;border-radius:5px;}
+    #maindivforgetbuttonsend{height:50px;width:150px;background:-webkit-linear-gradient(left,#a445b2,#fa4299);border:transparent;margin-top:190px;margin-left:5px;border-radius:5px;}
+    #maindivsignsubmit{font-size:16px;height:50px;width:150px;background:-webkit-linear-gradient(left,#a445b2,#fa4299);border:transparent;margin-top:17px;border-radius:5px;margin-left:5px;}
+    #maindivforgetsubmit{font-size:16px;height:50px;width:150px;background:-webkit-linear-gradient(left,#a445b2,#fa4299);margin-top:20px;border:transparent;border-radius:5px;margin-left:5px;}
+
+    #mb{margin-top:-850;background: rgb(2, 20, 82);position:relative;width:1000px;height:50px; margin-left:220px;padding-bottom: 15px;padding-top: 5px;}
+
+</style>
+<script>
+let w=window.innerWidth;
+const maindiv = document.createElement("div");
+maindiv.id = "maindiv";
+document.body.appendChild(maindiv);
+const maindivlogin = document.createElement("div");
+maindivlogin.style="height:200px;width:325px;margin-left:15px;border-radius:5px;margin-top:5px;";
+maindivlogin.id = "maindivlogin";
+maindivlogin.innerHTML='<form method="post" id="login" action="/login">{% csrf_token %}'+
+    '<div id="maindivloginname">Name:<br><input type="text" id="username" name="name" placeholder="username" value="" required></div>'+
+    '<div id="maindivloinpassword">Password:<br><input id="password" type="password" name="password" placeholder="password" required value=""></div>'+
+    '<button  id="maindivloginsubmit">Login</button><input type="text" name="deviceid" id="deviceids" style="display:none" ></form><div style="margin-left:170px;margin-top:-30px;"><button onclick="forget()" id="maindivforgetbutton">Forget Password?</button></div>';
+const maindivbuttons = document.createElement("div");
+maindivbuttons.id = "maindivbuttons";
+const maindivloginbutton = document.createElement("button");
+maindivloginbutton.innerHTML="Login";
+maindivloginbutton.setAttribute('onclick','login()');
+maindivloginbutton.id="maindivloginbutton";
+maindivloginbutton.style="background:-webkit-linear-gradient(200deg,#FED8F7,#C4DDFE);border-radius:10px;height:40px;";
+const maindivsignupbutton = document.createElement("button");
+maindivsignupbutton.innerHTML="Signup";
+maindivsignupbutton.setAttribute('onclick','signup()');
+maindivsignupbutton.id="maindivsignupbutton";
+maindiv.appendChild(maindivbuttons);
+maindiv.appendChild(maindivlogin);
+maindivbuttons.appendChild(maindivloginbutton);
+maindivbuttons.appendChild(maindivsignupbutton);
+const maindivforget = document.createElement("div");
+maindivforget.id = "maindivforget";
+maindivforget.style="height:200px;width:325px;margin-left:12px;border-radius:5px;margin-top:5px;";
+maindivforget.innerHTML='<form method="post" id="forget" >{% csrf_token %}'+
+    '<div id="maindivforgetemail">Email:<br><input id="forgetemail" name="forgetemail" type="Email" oninput="formail()" style="width:250px;" placeholder="Email" value=""></div>'+
+    '<div style="margin-top: -30px; margin-left: 260px;"><button type="submit" id="sendbuttonf" >Send</button></div></form>'+
+    '<form method="post" id="verifybuttonf">{% csrf_token %}<div style="margin-top: -10px; margin-left: 260px;"><button type="submit" style="color:transparent;background:transparent;" id="verifybuttonff">Verify</button></div>'+
+    '<div id="maindivforgetotp">OTP:<br><input  id="forgetotp"  name="forgetotp" type="number"  placeholder="otp"  value=""></div></form>'+
+    '<form method="post" action="/forget">{% csrf_token %}<div id="maindivforgetpasswordn">New Password:<br><input  id="forgetpassword" name="forgetpassword" type="passord" oninput="passspcify()" placeholder="new password" value=""><span id="passspcify" style="margin-left:200px;"></span></div>'+
+    '<div id="maindivforgetpasswordcon">Conform Password:<br><input  id="forgetpasswordco"  name="forgetpasswordco" type="password" oninput="matchpassword()" placeholder="conform password" value=""><span id="match" style="margin-left:200px;"></span></div>'+
+    '<button id="maindivforgetsubmit" type="submit">Forget Password?</button><input type="text" name="email" id="formail" style="display:none"></form>'+
+    '<div style="margin-top:-70px;margin-left:170px;"><button onclick="login()" id="maindivsigninbutton">already have |signin</button></div>';
+maindiv.appendChild(maindivforget);
+const maindivsignup = document.createElement("div");
+maindivsignup.id = "maindivsignup";
+maindivsignup.innerHTML='<form method="post" id="sinup" action="login" >{% csrf_token %}'+
+    '<div id="maindivsignname">Name:<br><input name="username" id="signname" type="text" placeholder="Name" oninput="names()" value="" required></div>'+
+    '<br><div id="maindivsignemail">Email:<br><input id="signemail" name="email" type="Email" placeholder="Email" oninput="emails()" value=""></div>'+
+    '<div id="maindivsignpassword">Password:<br><input  id="signpassword" name="password" type="password" oninput="passwords()" style="width:250px;"placeholder="password" value="" required></div>'+
+    '<div style="margin-top: -30px; margin-left: 260px;"><button type="submit" id="sendbutton" ">Send</button></div></form>'+
+    '<form method="post" id="verifybutton" action="otpverify">{% csrf_token %}<div style="margin-top: 20px; background:transparent;margin-left: 260px;"><button type="submit" style="color:transparent;background:transparent;" id="verifybuttonn">Verify</button></div>'+
+    '<div id="maindivsignotp">OTP:<br><input  id="signotp"  name="signotp" type="number" placeholder="otp"  value=""></div></form>'+
+    '<form method="post" id="signupsend" action="/signup">{% csrf_token %}<input type="text" name="sendname" id="sendname" style="display:none;" required><input type="email" name="sendemail" id="sendemail"style="display:none;" required><input type="password" name="sendpassword" id="sendpassword"style="display:none;" required><button id="maindivsignsubmit" type="submit" >Signup</button></form>'+
+    '<div style="margin-top:-70px;margin-left:170px;"><button onclick="login()" id="maindivsigninbutton">already have |signin</button></div>';
+maindiv.appendChild(maindivsignup);
+maindivbuttons.appendChild(maindivloginbutton);
+maindivbuttons.appendChild(maindivsignupbutton);
+function passspcify(){
+    const passwordspecify=document.getElementById('forgetpassword').value; 
+    var stringC="A B C D E F G H I J K L M N O P Q R S T U V W X Y Z";
+    var stringS="a b c d e f g h i j k l m n o p q r s t u v w x y z";
+    var number="1 2 3 4 5 6 7 8 9 0";
+    var spchar="! ~ @ # $ % & . , : ";
+    const alength=passwordspecify.split("");
+    for(let i=0;i<alength.length;i++){
+    if (stringC.includes(alength[i])|| stringS.includes(alength[i])||number.includes(alength[i])||spchar.includes(alength[i])){
+        document.getElementById('passspcify').innerHTML="must 6 letters ";
+        if(alength.length>=6){
+        document.getElementById('passspcify').innerHTML="Strong";
+        forget();}
+    }
+    else{
+        document.getElementById('passspcify').innerHTML="weak";
+        forget();
+    }
+}
+}
+function matchpassword(){
+const forgetpassword=document.getElementById('forgetpassword').value;
+const forgetpasswordcon=document.getElementById('forgetpasswordco').value;
+if (forgetpasswordcon===forgetpassword){
+    document.getElementById('match').innerHTML="Matched";
+    forget();
+}
+else{    
+    document.getElementById('match').innerHTML="Not Matched";
+    forget();
+}
+};
+document.getElementById('maindivsignup').style="display:none;";
+document.getElementById('maindivforget').style="display:none;";
+function signup(){
+document.getElementById('maindivlogin').style="display:none;";
+document.getElementById('maindivforget').style="display:none;";
+document.getElementById('maindivsignup').style="margin-left:20px;margin-top:10px;";
+document.getElementById('maindivsignupbutton').style="background:-webkit-linear-gradient(200deg,#FED8F7,#C4DDFE);border-radius:10px;height:40px;margin-top:5px;";
+document.getElementById('maindivloginbutton').style="background:transparent";
+
+}
+function login(){
+document.getElementById('maindivsignup').style="display:none;";
+document.getElementById('maindivforget').style="display:none;";
+document.getElementById('maindivlogin').style="margin-left:15px;margin-top:37px;";
+document.getElementById('maindivloginbutton').style="background:-webkit-linear-gradient(200deg,#FED8F7,#C4DDFE);border-radius:10px;height:40px;margin-top:5px;";
+document.getElementById('maindivsignupbutton').style="background:transparent";
+
+}
+function forget(){
+document.getElementById('maindivsignup').style="display:none;";
+document.getElementById('maindivlogin').style="display:none;";
+document.getElementById('maindivforget').style="margin-left:20px;margin-top:10px;";
+document.getElementById('maindivloginbutton').style="background:transparent";
+document.getElementById('maindivsignupbutton').style="background:transparent";
+
+}
+document.getElementById('maindivsignsubmit').style="opacity:0.5;cursor:no-drop;";
+document.getElementById('maindivforgetsubmit').style="opacity:0.5;cursor:no-drop;";
+
+  if (w >1537){
+maindiv.style="margin-left:350px;margin-top:600px;";
+}
+else if(w<700){
+maindiv.style="margin-left:20px;margin-top:120px;padding-right:30px;";
+}
+function names(){
+    document.getElementById('sendname').value=document.getElementById('signname').value;
+}
+function emails(){
+    document.getElementById('sendemail').value=document.getElementById('signemail').value;
+}
+function passwords(){
+    document.getElementById('sendpassword').value=document.getElementById('signpassword').value;
+}
+function formail(){
+    document.getElementById('formail').value=document.getElementById('forgetemail').value;
+}
+</script>
+
+<script>
+$(document).on('submit','#sinup',function(e){
+        e.preventDefault();
+        $.ajax({
+            type:'POST',
+            url:'{% url "otpverify" %}',
+            data:
+            {
+                name:$("#signname").val(),
+                email:$("#signemail").val(),
+                password:$("#signpassword").val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+            },
+            success:function(){
+            document.getElementById('sendbutton').innerHTML="Resend";
+            document.getElementById('maindivsignotp').style="margin-top:-60px;";
+            document.getElementById('signotp').style="width:250px;";
+            const vfb=document.getElementById('verifybuttonn');
+            vfb.style="border-radius: 10px; width: 50px; height: 30px; background: -webkit-linear-gradient(left, rgb(164, 69, 178), rgb(250, 66, 153));margin-top:10px;";
+            signup();
+            }
+           })
+        });
+        $(document).on('submit','#verifybutton',function(e){
+        e.preventDefault();
+        
+        $.ajax({
+            type:'POST',
+            url:'{% url "otpverify" %}',
+            data:
+            {
+                otp:$("#signotp").val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+
+            },
+            success:function(response){
+                function names(){
+                    document.getElementById('sendname').value=response+document.getElementById('signname').value;
+                }
+                function emails(){
+                    document.getElementById('sendemail').value=response+document.getElementById('signemail').value;
+                }
+                function passwords(){
+                    document.getElementById('sendpassword').value=response+document.getElementById('signpassword').value;
+                }
+                if(response =='Done'){
+                document.getElementById('maindivsignsubmit').style="opacity:1;cursor:default;";}
+                
+                names();
+                emails();
+                passwords();
+            var vfb=response;
+            document.getElementById('verifybuttonn').innerHTML=vfb;
+            signup();
+            }
+            })
+        });
+        $(document).on('submit','#forget',function(e){
+            e.preventDefault();
+            $.ajax({
+                type:'POST',
+                url:'{% url "forget" %}',
+                data:
+                {
+                    email:$("#forgetemail").val(),
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+                },
+                success:function(){
+                document.getElementById('sendbuttonf').style="display:non;";
+                document.getElementById('maindivforgetotp').style="margin-top:-60px;";
+                document.getElementById('forgetotp').style="width:250px;";
+                const vfb=document.getElementById('verifybuttonff');
+                vfb.style="border-radius: 10px; width: 50px; height: 30px; background: -webkit-linear-gradient(left, rgb(164, 69, 178), rgb(250, 66, 153));margin-top:40px;";
+                forget();
+                
+                }
+               })
+            });
+        $(document).on('submit','#verifybuttonf',function(e){
+            e.preventDefault();
+            $.ajax({
+                type:'POST',
+                url:'{% url "otpverify" %}',
+                data:
+                {
+                    otp:$("#forgetotp").val(),
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+    
+                },
+                success:function(data){
+                var vfb=data;
+                document.getElementById('verifybuttonff').innerHTML=vfb;
+                forget();
+                function formail(){
+                    document.getElementById('formail').value=data+document.getElementById('forgetemail').value;
+                }
+                formail();
+                if(data =='Done'){document.getElementById('maindivforgetsubmit').style="opacity:1;cursor:default;";}
+                else if(data =='None'){document.getElementById('maindivforgetsubmit').style="opacity:0.5;cursor:no-drop;";}
+                }
+                })
+            });
+
+
+
+            
+    </script>

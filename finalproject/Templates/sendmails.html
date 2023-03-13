@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="emails">
+            <form method="POST" action="sendexammails">{% csrf_token %}
+                <label for="emailcontent"><h3>Enter content of the Mails:</h3></label>
+<textarea id="emailcontent" name="emailcontent" rows="30" cols="100">
+</textarea>
+<input type="submit" value="Send Mails"></form>
+        </div>
+    </body>
+</html>
